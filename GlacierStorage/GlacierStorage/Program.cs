@@ -24,6 +24,7 @@ using Amazon.Glacier.Transfer;
 using System.Collections.Specialized;
 using System.Configuration;
 using Amazon.Runtime;
+using Nito.AsyncEx;
 
 namespace GlacierStorage
 {
@@ -48,7 +49,12 @@ namespace GlacierStorage
         static string downloadFilePath = null;
 
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
+        {
+            AsyncContext.Run(() => MainAsync(args));
+        }
+
+        static async void MainAsync(string[] args)
         {
             if (CheckRequiredFields())
             {
@@ -59,11 +65,11 @@ namespace GlacierStorage
                     {
                         // Creates a new Vault
                         Console.WriteLine("Create Vault");
-                        manager.CreateVault(vaultName);
+                        await manager.CreateVaultAsync(vaultName);
 
                         // Uploads the specified file to Glacier.
                         Console.WriteLine("Upload a Archive");
-                        var uploadResult = manager.Upload(vaultName, "Archive Description", filePath);
+                        var uploadResult = await manager.UploadAsync(vaultName, "Archive Description", filePath);
                         archiveId = uploadResult.ArchiveId;
                         Console.WriteLine("Upload successful. Archive Id : {0}  Checksum : {1}",
                             uploadResult.ArchiveId, uploadResult.Checksum);
@@ -79,10 +85,10 @@ namespace GlacierStorage
                         Console.WriteLine("Download the Archive");
                         var options = new DownloadOptions();
                         options.StreamTransferProgress += OnProgress;
-                        manager.Download(vaultName, archiveId, downloadFilePath, options);
+                        await manager.DownloadAsync(vaultName, archiveId, downloadFilePath, options);
 
                         Console.WriteLine("Delete the Archive");
-                        manager.DeleteArchive(vaultName, archiveId);
+                        await manager.DeleteArchiveAsync(vaultName, archiveId);
 
                     }
                     catch (AmazonGlacierException e)

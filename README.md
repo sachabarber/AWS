@@ -7,3 +7,4 @@ Collection of AWS .NET (and possibly Scala) Samples
 ## Storage
 - [S3 Buckets and Keys example](https://sachabarbs.wordpress.com/2018/09/03/aws-s3-storage/)
 - [Glacier Storage](https://sachabarbs.wordpress.com/2018/09/04/aws-glacial-storage/)
+- [S3 File System](https://sachabarbs.wordpress.com/2018/09/05/aws-s3-file-system/)

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Glacier" Version="3.3.1.18" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.8.2" />
     <PackageReference Include="Nito.AsyncEx" Version="4.0.1" />
   </ItemGroup>
 

@@ -20,6 +20,7 @@ namespace S3TransferUtility
         // Change the bucketName and keyName fields to values that match your bucketname and keyname
         static string bucketName = "some-nice-transferutility-bucket";
         static string fileName = $"{Guid.NewGuid().ToString("N")}.txt";
+        static bool deleteBucket = true;
         static IAmazonS3 client;
 
         private static void Main(string[] args)
@@ -44,6 +45,11 @@ namespace S3TransferUtility
 
                     Console.WriteLine("Downloadinng an object from S3");
                     await DownloadingAnObjectFromS3AsAStream();
+
+                    if(deleteBucket)
+                    {
+                        await DeleteBucketAsync();
+                    }
                 }
             }
             Console.WriteLine("Press any key to continue...");
@@ -116,19 +122,28 @@ namespace S3TransferUtility
         {
             await CarryOutAWSTask(async () =>
             {
+
                 var bucketToReadFrom = $"public-{bucketName}";
                 var fileTransferUtility = new TransferUtility(client);
-                string aTempFile = Path.Combine(Path.GetTempPath(), "SavedS3TextFile.txt");
-                await fileTransferUtility.DownloadAsync(aTempFile, bucketToReadFrom, fileName);
-                using (var fs = new FileStream(aTempFile, FileMode.Open))
+                string theTempFile = Path.Combine(Path.GetTempPath(), "SavedS3TextFile.txt");
+                try
                 {
-                    using (var reader = new StreamReader(fs))
+                    await fileTransferUtility.DownloadAsync(theTempFile, bucketToReadFrom, fileName);
+                    using (var fs = new FileStream(theTempFile, FileMode.Open))
                     {
-                        var contents = await reader.ReadToEndAsync();
-                        Console.WriteLine($"Content of saved file {aTempFile} is");
-                        Console.WriteLine(contents);
+                        using (var reader = new StreamReader(fs))
+                        {
+                            var contents = await reader.ReadToEndAsync();
+                            Console.WriteLine($"Content of saved file {theTempFile} is");
+                            Console.WriteLine(contents);
+                        }
                     }
                 }
+                finally
+                {
+                    File.Delete(theTempFile);
+                }
+
             }, "Downloading an Object from S3 as a Stream");
         }
 
@@ -153,6 +168,14 @@ namespace S3TransferUtility
             }
 
             return true;
+        }
+
+        async Task DeleteBucketAsync()
+        {
+            await CarryOutAWSTask(async () =>
+            {
+                await client.DeleteBucketAsync(bucketName);
+            }, "delete bucket");
         }
 
         async Task CreateABucketAsync(string bucketToCreate, bool isPublic = true)

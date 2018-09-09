@@ -18,9 +18,10 @@ namespace S3TransferUtility
         // You must also sign up for an Amazon S3 account for this to work
         // See http://aws.amazon.com/s3/ for details on creating an Amazon S3 account
         // Change the bucketName and keyName fields to values that match your bucketname and keyname
-        static string bucketName = "some-nice-transferutility-bucket";
+        static string bucketName = "public-some-nice-transferutility-bucket";
         static string fileName = $"{Guid.NewGuid().ToString("N")}.txt";
         static bool deleteBucket = true;
+        static bool cleanAllS3FilesAndBuckets = false;
         static IAmazonS3 client;
 
         private static void Main(string[] args)
@@ -35,7 +36,11 @@ namespace S3TransferUtility
             {
                 using (client = new AmazonS3Client())
                 {
-                    var fileTransferUtility = new TransferUtility(client);
+                    if(cleanAllS3FilesAndBuckets)
+                    {
+                        //do some housekeeping, of old buckets
+                        await CleanAllBucketsAndFilesAsync();
+                    }
 
                     Console.WriteLine("Writing an object using stream");
                     await WritingAStreamPublicAsync();
@@ -48,6 +53,8 @@ namespace S3TransferUtility
 
                     if(deleteBucket)
                     {
+                        Console.WriteLine($"Deleting bucket '{bucketName}'");
+                        await client.DeleteObjectAsync(bucketName, fileName);
                         await DeleteBucketAsync();
                     }
                 }
@@ -71,8 +78,7 @@ namespace S3TransferUtility
                     return stream;
                 }
 
-                var bucketToCreate = $"public-{bucketName}";
-                await CreateABucketAsync(bucketToCreate);
+                await CreateABucketAsync(bucketName);
 
                 var fileTransferUtility = new TransferUtility(client);
                 var contentsToUpload = "some random string contents";
@@ -84,7 +90,7 @@ namespace S3TransferUtility
                     {
                         InputStream = streamToUpload,
                         Key = fileName,
-                        BucketName = bucketToCreate,
+                        BucketName = bucketName,
                         CannedACL = S3CannedACL.PublicRead
                     };
 
@@ -102,11 +108,9 @@ namespace S3TransferUtility
         {
             await CarryOutAWSTask(async () =>
             {
-                var bucketToReadFrom = $"public-{bucketName}";
 
                 var fileTransferUtility = new TransferUtility(client);
-
-                using (var fs = await fileTransferUtility.OpenStreamAsync(bucketToReadFrom, fileName, CancellationToken.None))
+                using (var fs = await fileTransferUtility.OpenStreamAsync(bucketName, fileName, CancellationToken.None))
                 {
                     using (var reader = new StreamReader(fs))
                     {
@@ -122,13 +126,11 @@ namespace S3TransferUtility
         {
             await CarryOutAWSTask(async () =>
             {
-
-                var bucketToReadFrom = $"public-{bucketName}";
                 var fileTransferUtility = new TransferUtility(client);
                 string theTempFile = Path.Combine(Path.GetTempPath(), "SavedS3TextFile.txt");
                 try
                 {
-                    await fileTransferUtility.DownloadAsync(theTempFile, bucketToReadFrom, fileName);
+                    await fileTransferUtility.DownloadAsync(theTempFile, bucketName, fileName);
                     using (var fs = new FileStream(theTempFile, FileMode.Open))
                     {
                         using (var reader = new StreamReader(fs))
@@ -146,6 +148,24 @@ namespace S3TransferUtility
 
             }, "Downloading an Object from S3 as a Stream");
         }
+
+
+        async Task CleanAllBucketsAndFilesAsync()
+        {
+            ListBucketsResponse response = await client.ListBucketsAsync();
+            foreach (S3Bucket bucket in response.Buckets)
+            {
+                ListObjectsRequest request = new ListObjectsRequest();
+                request.BucketName = bucket.BucketName;
+                var responseFile = await client.ListObjectsAsync(request);
+                foreach (S3Object entry in responseFile.S3Objects)
+                {
+                    client.DeleteObject(bucket.BucketName, entry.Key);
+                }
+                await client.DeleteBucketAsync(bucket.BucketName);
+            }
+        }
+
 
         bool CheckRequiredFields()
         {

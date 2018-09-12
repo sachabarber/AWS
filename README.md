@@ -14,3 +14,15 @@ Collection of AWS .NET (and possibly Scala) Samples
 - [SQS](https://sachabarbs.wordpress.com/2018/09/12/aws-simple-queue-service-sqs/)
 
 
+
+
+TODO
+- Lambda
+- Lambda triggered via SQS/S3
+- Step functions
+- SES
+- SMTP
+- Kinesis
+- Dynamo DB
+- SWF
+- Cloudwatch

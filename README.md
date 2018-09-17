@@ -12,6 +12,7 @@ Collection of AWS .NET (and possibly Scala) Samples
 
 ## Messaging
 - [SQS](https://sachabarbs.wordpress.com/2018/09/12/aws-simple-queue-service-sqs/)
+- [Kinesis Data Streams / KCL](https://sachabarbs.wordpress.com/2018/09/17/aws-kinesis/)
 
 
 
@@ -26,3 +27,4 @@ TODO
 - Dynamo DB
 - SWF
 - Cloudwatch
+- Elastic Beanstack deployment of console app / Webapp

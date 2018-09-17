@@ -15,7 +15,8 @@ namespace Amazon.Kinesis.DataStreamproducer
     {
 
 
-        private static readonly AmazonKinesisClient kinesisClient = new AmazonKinesisClient(RegionEndpoint.EUWest2);
+        private static readonly AmazonKinesisClient kinesisClient = 
+            new AmazonKinesisClient(RegionEndpoint.EUWest2);
         const string myStreamName = "myTestStream";
 
         public static void Main(string[] args)
@@ -25,11 +26,8 @@ namespace Amazon.Kinesis.DataStreamproducer
 
         private async Task WriteToStream()
         {
-
             const string myStreamName = "myTestStream";
             const int myStreamSize = 1;
-
-
 
             try
             {
@@ -38,12 +36,12 @@ namespace Amazon.Kinesis.DataStreamproducer
                 createStreamRequest.ShardCount = myStreamSize;
                 var createStreamReq = createStreamRequest;
 
-                var existingStreams = kinesisClient.ListStreamsAsync().Result;
+                var existingStreams = await kinesisClient.ListStreamsAsync();
 
                 if (!existingStreams.StreamNames.Contains(myStreamName))
                 {
 
-                    var CreateStreamResponse = kinesisClient.CreateStreamAsync(createStreamReq).Result;
+                    var CreateStreamResponse = await kinesisClient.CreateStreamAsync(createStreamReq);
                     Console.WriteLine("Created Stream : " + myStreamName);
                 }
             }
@@ -70,8 +68,10 @@ namespace Amazon.Kinesis.DataStreamproducer
                         requestRecord.PartitionKey = "url-response-times";
                         requestRecord.Data = memoryStream;
 
-                        PutRecordResponse responseRecord = await kinesisClient.PutRecordAsync(requestRecord);
-                        Console.WriteLine("Successfully sent record to Kinesis. Sequence number: {0}", responseRecord.SequenceNumber);
+                        PutRecordResponse responseRecord = 
+                            await kinesisClient.PutRecordAsync(requestRecord);
+                        Console.WriteLine("Successfully sent record to Kinesis. Sequence number: {0}", 
+                            responseRecord.SequenceNumber);
                     }
                     catch (Exception ex)
                     {

@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClientLibrary\ClientLibrary.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="kcl.properties">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

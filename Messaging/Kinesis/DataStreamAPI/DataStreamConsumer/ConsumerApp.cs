@@ -11,9 +11,8 @@ namespace Amazon.Kinesis.DataStreamConsumer
     /// </summary>
     class ConsumerApp
     {
-
-
-        private static readonly AmazonKinesisClient kinesisClient = new AmazonKinesisClient(RegionEndpoint.EUWest2);
+        private static readonly AmazonKinesisClient kinesisClient = 
+            new AmazonKinesisClient(RegionEndpoint.EUWest2);
         const string myStreamName = "myTestStream";
 
         public static void Main(string[] args)
@@ -23,11 +22,11 @@ namespace Amazon.Kinesis.DataStreamConsumer
 
         private async Task ReadFromStream()
         {
-
             DescribeStreamRequest describeRequest = new DescribeStreamRequest();
             describeRequest.StreamName = myStreamName;
 
-            DescribeStreamResponse describeResponse = await kinesisClient.DescribeStreamAsync(describeRequest);
+            DescribeStreamResponse describeResponse = 
+                await kinesisClient.DescribeStreamAsync(describeRequest);
             List<Shard> shards = describeResponse.StreamDescription.Shards;
 
             foreach (Shard shard in shards)

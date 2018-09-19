@@ -15,16 +15,21 @@ Collection of AWS .NET (and possibly Scala) Samples
 - [Kinesis Data Streams / KCL](https://sachabarbs.wordpress.com/2018/09/17/aws-kinesis/)
 
 
+## Compute
+- [Deploying ASP .NET Core app to Elastic Beanstalk](https://sachabarbs.wordpress.com/2018/09/19/aws-deploying-asp-net-core-app-to-elastic-beanstalk/)
+
+
 
 
 TODO
 - Lambda
 - Lambda triggered via SQS/S3
+- Lambda triggered via Kinesis
 - Step functions
 - SES
 - SMTP
-- Kinesis
 - Dynamo DB
+- Batch
 - SWF
 - Cloudwatch
-- Elastic Beanstack deployment of console app / Webapp
+

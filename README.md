@@ -17,6 +17,7 @@ Collection of AWS .NET (and possibly Scala) Samples
 
 ## Compute
 - [Deploying ASP .NET Core app to Elastic Beanstalk](https://sachabarbs.wordpress.com/2018/09/19/aws-deploying-asp-net-core-app-to-elastic-beanstalk/)
+- [SQS triggered Lambda writing to S3](https://sachabarbs.wordpress.com/2018/09/27/aws-lambda/)
 
 
 

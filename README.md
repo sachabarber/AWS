@@ -18,19 +18,26 @@ Collection of AWS .NET (and possibly Scala) Samples
 ## Compute
 - [Deploying ASP .NET Core app to Elastic Beanstalk](https://sachabarbs.wordpress.com/2018/09/19/aws-deploying-asp-net-core-app-to-elastic-beanstalk/)
 - [SQS triggered Lambda writing to S3](https://sachabarbs.wordpress.com/2018/09/27/aws-lambda/)
-
+- [Lambda exposed via Api Gateway](https://sachabarbs.wordpress.com/2018/10/07/aws-lambda-exposed-via-apigateway/)
 
 
 
 TODO
-- Lambda
-- Lambda triggered via SQS/S3
-- Lambda triggered via Kinesis
+- Serverless framework
 - Step functions
-- SES
-- SMTP
-- Dynamo DB
+
 - Batch
 - SWF
+- SNS
+- SES
+- SMTP
+
+- Dynamo DB
+- RDS
+- ElastiCache
+- Neptune
+- Amazon Redshift
+
+
 - Cloudwatch
 

@@ -19,11 +19,10 @@ Collection of AWS .NET (and possibly Scala) Samples
 - [Deploying ASP .NET Core app to Elastic Beanstalk](https://sachabarbs.wordpress.com/2018/09/19/aws-deploying-asp-net-core-app-to-elastic-beanstalk/)
 - [SQS triggered Lambda writing to S3](https://sachabarbs.wordpress.com/2018/09/27/aws-lambda/)
 - [Lambda exposed via Api Gateway](https://sachabarbs.wordpress.com/2018/10/07/aws-lambda-exposed-via-apigateway/)
-
+- [Lambda exposed via Api  using 'Serverless Framework'](https://sachabarbs.wordpress.com/2018/10/15/aws-using-serveless-framework-to-create-a-lambda-function/)
 
 
 TODO
-- Serverless framework
 - Step functions
 
 - Batch

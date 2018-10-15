@@ -1,34 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Net;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net;
 
-// Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+[assembly:LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
-namespace Lambda.ApiGateway.DemoApp
+namespace AwsDotnetCsharp
 {
-    public class Function
+    public class Handler
     {
-
         ITimeProcessor processor = new TimeProcessor();
 
-        /// <summary>
-        /// Default constructor. This constructor is used by Lambda to construct
-        /// the instance. When invoked in a Lambda environment
-        /// the AWS credentials will come from the IAM role associated with the
-        /// function and the AWS region will be set to the
-        /// region the Lambda function is executed in.
-        /// </summary>
-        public Function()
-        {
-
-        }
-
-        public APIGatewayProxyResponse FunctionHandler(
-            APIGatewayProxyRequest apigProxyEvent, ILambdaContext context)
+        public APIGatewayProxyResponse Hello(
+           APIGatewayProxyRequest apigProxyEvent, ILambdaContext context)
         {
             LogMessage(context, "Processing request started");
             APIGatewayProxyResponse response;
@@ -41,7 +27,7 @@ namespace Lambda.ApiGateway.DemoApp
             }
             catch (Exception ex)
             {
-                LogMessage(context, 
+                LogMessage(context,
                     string.Format("Processing request failed - {0}", ex.Message));
                 response = CreateResponse(null);
             }
@@ -82,6 +68,7 @@ namespace Lambda.ApiGateway.DemoApp
                     ctx.FunctionName,
                     msg));
         }
-
     }
+
+  
 }

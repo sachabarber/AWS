@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStepFunction", "Simpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStepFunction.Tests", "SimpleStepFunction.Tests\SimpleStepFunction.Tests.csproj", "{5120BB3D-5AA7-4989-93C8-4D8C0BEB2159}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvokeStatemachine", "InvokeStatemachine\InvokeStatemachine.csproj", "{2A1911B1-022B-4825-8685-B8B8668D4667}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5120BB3D-5AA7-4989-93C8-4D8C0BEB2159}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5120BB3D-5AA7-4989-93C8-4D8C0BEB2159}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5120BB3D-5AA7-4989-93C8-4D8C0BEB2159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1911B1-022B-4825-8685-B8B8668D4667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1911B1-022B-4825-8685-B8B8668D4667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1911B1-022B-4825-8685-B8B8668D4667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1911B1-022B-4825-8685-B8B8668D4667}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

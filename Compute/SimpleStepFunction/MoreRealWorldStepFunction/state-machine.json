@@ -1,0 +1,53 @@
+﻿{
+  "Comment": "State Machine",
+  "StartAt": "Initial",
+  "States": {
+    "Initial": {
+      "Type": "Task",
+      "Resource": "${InitialTask.Arn}",
+      "Next": "WaitToActivate"
+    },
+    "WaitToActivate": {
+      "Type": "Wait",
+      "SecondsPath": "$.WaitInSeconds",
+      "Next": "Pass"
+    },
+    "Pass": {
+      "Type": "Task",
+      "Resource": "${PassTask.Arn}",
+      "Next": "ChoiceStateX"
+    },
+
+    "ChoiceStateX": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.IsMale",
+          "NumericEquals": 1,
+          "Next": "PrintMaleInfo"
+        },
+        {
+          "Variable": "$.IsMale",
+          "NumericEquals": 0,
+          "Next": "PrintFemaleInfo"
+        }
+      ],
+      "Default": "PrintInfo"
+    },
+    "PrintMaleInfo": {
+      "Type": "Task",
+      "Resource": "${PrintMaleInfoTask.Arn}",
+      "End": true
+    },
+    "PrintFemaleInfo": {
+      "Type": "Task",
+      "Resource": "${PrintFemaleInfoTask.Arn}",
+      "End": true
+    },
+    "PrintInfo": {
+      "Type": "Task",
+      "Resource": "${PrintInfoTask.Arn}",
+      "End": true
+    }
+  }
+}

@@ -20,23 +20,26 @@ Collection of AWS .NET (and possibly Scala) Samples
 - [SQS triggered Lambda writing to S3](https://sachabarbs.wordpress.com/2018/09/27/aws-lambda/)
 - [Lambda exposed via Api Gateway](https://sachabarbs.wordpress.com/2018/10/07/aws-lambda-exposed-via-apigateway/)
 - [Lambda exposed via Api  using 'Serverless Framework'](https://sachabarbs.wordpress.com/2018/10/15/aws-using-serveless-framework-to-create-a-lambda-function/)
+- [Step Functions](https://sachabarbs.wordpress.com/2018/10/30/aws-step-functions/)
+
+
+## AppServices
+
+- [SES/SMTP](https://sachabarbs.wordpress.com/2018/11/05/aws-simple-email-service-ses/)
+
+
 
 
 TODO
-- Step functions
+
 
 - Batch
 - SWF
 - SNS
-- SES
-- SMTP
-
 - Dynamo DB
 - RDS
 - ElastiCache
 - Neptune
 - Amazon Redshift
-
-
 - Cloudwatch
 

@@ -5,6 +5,7 @@ using System.Linq;
 using Amazon;
 using Amazon.SimpleWorkflow;
 using Amazon.SimpleWorkflow.Model;
+using System.Threading;
 
 namespace SwfInitiator
 {
@@ -15,6 +16,8 @@ namespace SwfInitiator
 
         public static void Main(string[] args)
         {
+            Console.Title = "INITIATOR";
+
             string workflowName = "HelloWorld Workflow";
 
             // Setup
@@ -31,9 +34,11 @@ namespace SwfInitiator
 
             //// Launch Workers for Activity2
             StartProcess(@"..\..\..\Worker\bin\Debug\SwfWorker", new[] { "Activity2" });
+            StartProcess(@"..\..\..\Worker\bin\Debug\SwfWorker", new[] { "Activity2" });
 
             //// Start the Deciders, which defines the structure/flow of Workflow
             StartProcess(@"..\..\..\Decider\bin\Debug\SwfDecider", null);
+            Thread.Sleep(1000);
 
             //Start the workflow
             Task.Run(() => StartWorkflow(workflowName));
@@ -51,7 +56,6 @@ namespace SwfInitiator
             p.StartInfo.UseShellExecute = true;
             p.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             p.Start();
-            p.WaitForExit();
         }
 
         static void RegisterDomain()

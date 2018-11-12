@@ -14,6 +14,7 @@ namespace SwfWorker
         public static void Main(string[] args)
         {
             string tasklistName = args[0];
+            Console.Title = tasklistName.ToUpper();
             Task.Run(() => Worker(tasklistName));
             Console.Read();
         }
@@ -46,6 +47,8 @@ namespace SwfWorker
                 }
                 else
                 {
+                    Console.WriteLine($"Worker saw Input {pollForActivityTaskResponse.ActivityTask.Input}");
+
                     var respondActivityTaskCompletedRequest = new RespondActivityTaskCompletedRequest()
                         {
                             Result = "{\"activityResult1\":\"Result Value1\"}",

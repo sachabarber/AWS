@@ -16,6 +16,7 @@ namespace SwfDeciderDecider
 
         public static void Main(string[] args)
         {
+            Console.Title = "DECIDER";
             // Start the Deciders, which defines the structure/flow of Workflow
             Task.Run(() => Decider());
             Console.Read();

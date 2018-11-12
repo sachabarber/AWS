@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "swf", "swf.csproj", "{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfInitiator", "Initiator\SwfInitiator.csproj", "{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfWorker", "Worker\SwfWorker.csproj", "{7C2FA538-9265-4E81-A91D-1964A75869C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfDecider", "Decider\SwfDecider.csproj", "{FBD389B9-B6B1-4420-AEC2-D95BD09482B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +19,19 @@ Global
 		{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C2FA538-9265-4E81-A91D-1964A75869C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C2FA538-9265-4E81-A91D-1964A75869C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C2FA538-9265-4E81-A91D-1964A75869C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C2FA538-9265-4E81-A91D-1964A75869C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBD389B9-B6B1-4420-AEC2-D95BD09482B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBD389B9-B6B1-4420-AEC2-D95BD09482B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBD389B9-B6B1-4420-AEC2-D95BD09482B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBD389B9-B6B1-4420-AEC2-D95BD09482B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9BEB401C-3138-4E31-990B-8A6B2A80D11B}
 	EndGlobalSection
 EndGlobal

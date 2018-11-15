@@ -8,7 +8,7 @@ namespace SwfWorker
 {
     class Program
     {
-        static string domainName = "HelloWorldDomain";
+        static string domainName = "SwfDemoDomain";
         static IAmazonSimpleWorkflow SwfClient = AWSClientFactory.CreateAmazonSimpleWorkflowClient();
 
         public static void Main(string[] args)
@@ -22,7 +22,7 @@ namespace SwfWorker
 
         static void Worker(string tasklistName)
         {
-            string prefix = string.Format("Worker{0}:{1:x} ", tasklistName,
+            string prefix = string.Format("WORKER {0}:{1:x} ", tasklistName,
                                   System.Threading.Thread.CurrentThread.ManagedThreadId);
             while (true)
             {
@@ -47,7 +47,7 @@ namespace SwfWorker
                 }
                 else
                 {
-                    Console.WriteLine($"Worker saw Input {pollForActivityTaskResponse.ActivityTask.Input}");
+                    Console.WriteLine($"{prefix} : saw Input {pollForActivityTaskResponse.ActivityTask.Input}");
 
                     var respondActivityTaskCompletedRequest = new RespondActivityTaskCompletedRequest()
                         {

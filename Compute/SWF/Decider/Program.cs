@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 using Amazon;
 using Amazon.SimpleWorkflow;
 using Amazon.SimpleWorkflow.Model;
@@ -10,7 +9,7 @@ namespace SwfDeciderDecider
 {
     class Program
     {
-        static string domainName = "HelloWorldDomain";
+        static string domainName = "SwfDemoDomain";
         static IAmazonSimpleWorkflow SwfDeciderClient =
                     AWSClientFactory.CreateAmazonSimpleWorkflowClient();
 
@@ -31,31 +30,31 @@ namespace SwfDeciderDecider
             int activityCount = 0; // This refers to total number of activities per workflow
             while (true)
             {
-                Console.WriteLine("Decider: Polling for decision task ...");
+                Console.WriteLine("DECIDER: Polling for decision task ...");
                 var request = new PollForDecisionTaskRequest()
                 {
                     Domain = domainName,
-                    TaskList = new TaskList() { Name = "HelloWorld" }
+                    TaskList = new TaskList() { Name = "SwfDemo" }
                 };
 
                 var response = SwfDeciderClient.PollForDecisionTask(request);
                 if (response.DecisionTask.TaskToken == null)
                 {
-                    Console.WriteLine("Decider: NULL");
+                    Console.WriteLine("DECIDER: NULL");
                     continue;
                 }
 
                 int completedActivityTaskCount = 0, totalActivityTaskCount = 0;
                 foreach (HistoryEvent e in response.DecisionTask.Events)
                 {
-                    Console.WriteLine($"Decider: EventType - {e.EventType}" +
+                    Console.WriteLine($"DECIDER: EventType - {e.EventType}" +
                         $", EventId - {e.EventId}");
                     if (e.EventType == "ActivityTaskCompleted")
                         completedActivityTaskCount++;
                     if (e.EventType.Value.StartsWith("Activity"))
                         totalActivityTaskCount++;
                 }
-                Console.WriteLine($".... completedCount={completedActivityTaskCount}");
+                Console.WriteLine($"completedCount={completedActivityTaskCount}");
 
                 var decisions = new List<Decision>();
                 if (totalActivityTaskCount == 0) // Create this only at the begining
@@ -79,7 +78,7 @@ namespace SwfDeciderDecider
                     };
                     decisions.Add(decision);
 
-                    Console.WriteLine("Decider: WORKFLOW COMPLETE!!!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine("DECIDER: WORKFLOW COMPLETE");
                 }
                 var respondDecisionTaskCompletedRequest =
                     new RespondDecisionTaskCompletedRequest()
@@ -108,7 +107,7 @@ namespace SwfDeciderDecider
                       Input = "{\"activityInput1\":\"value1\"}"
                   }
             };
-            Console.WriteLine($"Decider: ActivityId={decision.ScheduleActivityTaskDecisionAttributes.ActivityId}");
+            Console.WriteLine($"DECIDER: ActivityId={decision.ScheduleActivityTaskDecisionAttributes.ActivityId}");
             decisions.Add(decision);
         }
     }

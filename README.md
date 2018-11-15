@@ -26,6 +26,7 @@ Collection of AWS .NET (and possibly Scala) Samples
 ## AppServices
 
 - [SES/SMTP](https://sachabarbs.wordpress.com/2018/11/05/aws-simple-email-service-ses/)
+- [SWF](https://sachabarbs.wordpress.com/2018/11/15/aws-swf/)
 
 
 
@@ -34,7 +35,6 @@ TODO
 
 
 - Batch
-- SWF
 - SNS
 - Dynamo DB
 - RDS

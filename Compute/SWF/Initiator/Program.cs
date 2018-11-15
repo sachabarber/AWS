@@ -11,14 +11,14 @@ namespace SwfInitiator
 {
     class Program
     {
-        static string domainName = "HelloWorldDomain";
+        static string domainName = "SwfDemoDomain";
         static IAmazonSimpleWorkflow SwfClient = AWSClientFactory.CreateAmazonSimpleWorkflowClient();
 
         public static void Main(string[] args)
         {
             Console.Title = "INITIATOR";
 
-            string workflowName = "HelloWorld Workflow";
+            string workflowName = "SwfDemo Workflow";
 
             // Setup
             RegisterDomain();
@@ -72,12 +72,19 @@ namespace SwfInitiator
                 var request = new RegisterDomainRequest()
                 {
                     Name = domainName,
-                    Description = "Hello World Demo",
+                    Description = "Swf Demo",
                     WorkflowExecutionRetentionPeriodInDays = "1"
                 };
 
-                Console.WriteLine("Setup: Created Domain - " + domainName);
-                SwfClient.RegisterDomain(request);
+                Console.WriteLine("INITIATOR: Created Domain - " + domainName);
+                try
+                {
+                    SwfClient.RegisterDomain(request);
+                }
+                catch(DomainAlreadyExistsException dex)
+                {
+
+                }
             }
         }
 
@@ -98,7 +105,7 @@ namespace SwfInitiator
                 {
                     Name = name,
                     Domain = domainName,
-                    Description = "Hello World Activities",
+                    Description = "Swf Demo Activities",
                     Version = "2.0",
                     DefaultTaskList = new TaskList() { Name = tasklistName },//Worker poll based on this
                     DefaultTaskScheduleToCloseTimeout = "300",
@@ -106,8 +113,15 @@ namespace SwfInitiator
                     DefaultTaskStartToCloseTimeout = "450",
                     DefaultTaskHeartbeatTimeout = "NONE",
                 };
-                SwfClient.RegisterActivityType(request);
-                Console.WriteLine($"Setup: Created Activity Name - {request.Name}");
+                try
+                {
+
+                }
+                catch(TypeAlreadyExistsException tex)
+                {
+                    SwfClient.RegisterActivityType(request);
+                }
+                Console.WriteLine($"INITIATOR: Created Activity Name - {request.Name}");
             }
         }
 
@@ -132,23 +146,29 @@ namespace SwfInitiator
                     DefaultExecutionStartToCloseTimeout = "300",
                     DefaultTaskList = new TaskList()
                     {
-                        Name = "HelloWorld" // Decider need to poll for this task
+                        Name = "SwfDemo" // Decider need to poll for this task
                     },
                     DefaultTaskStartToCloseTimeout = "150",
                     Domain = domainName,
                     Name = name,
                     Version = "2.0"
                 };
+                try
+                {
 
-                SwfClient.RegisterWorkflowType(request);
+                }
+                catch(TypeAlreadyExistsException tex)
+                {
+                    SwfClient.RegisterWorkflowType(request);
+                }
 
-                Console.WriteLine($"Setup: Registerd Workflow Name - {request.Name}");
+                Console.WriteLine($"INITIATOR: Registerd Workflow Name - {request.Name}");
             }
         }
 
         static void StartWorkflow(string name)
         {
-            string workflowID = $"Hello World WorkflowID - {DateTime.Now.Ticks.ToString()}";
+            string workflowID = $"Swf DeomoID - {DateTime.Now.Ticks.ToString()}";
             SwfClient.StartWorkflowExecution(new StartWorkflowExecutionRequest()
             {
                 Input = "{\"inputparam1\":\"value1\"}", // Serialize input to a string
@@ -160,7 +180,7 @@ namespace SwfInitiator
                     Version = "2.0"
                 }
             });
-            Console.WriteLine($"Setup: Workflow Instance created ID={workflowID}");
+            Console.WriteLine($"INITIATOR: Workflow Instance created ID={workflowID}");
         }
     }
 }

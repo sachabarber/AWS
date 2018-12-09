@@ -29,6 +29,9 @@ Collection of AWS .NET (and possibly Scala) Samples
 - [SWF](https://sachabarbs.wordpress.com/2018/11/15/aws-swf/)
 
 
+## Databases
+- [DynamoDB](https://sachabarbs.wordpress.com/2018/12/09/aws-dynamodb/)
+
 
 
 TODO
@@ -36,10 +39,11 @@ TODO
 
 - Batch
 - SNS
-- Dynamo DB
 - RDS
 - ElastiCache
 - Neptune
 - Amazon Redshift
 - Cloudwatch
+- Fargate
+- App Mesh : https://aws.amazon.com/about-aws/whats-new/2018/11/introducing-aws-app-mesh---service-mesh-for-microservices-on-aws/
 

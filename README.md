@@ -27,6 +27,7 @@ Collection of AWS .NET (and possibly Scala) Samples
 
 - [SES/SMTP](https://sachabarbs.wordpress.com/2018/11/05/aws-simple-email-service-ses/)
 - [SWF](https://sachabarbs.wordpress.com/2018/11/15/aws-swf/)
+- [ElastiCache](https://sachabarbs.wordpress.com/2018/12/10/aws-elasticache/)
 
 
 ## Databases
@@ -38,12 +39,12 @@ TODO
 
 
 - Batch
+- Cloudwatch
+
 - SNS
 - RDS
-- ElastiCache
 - Neptune
 - Amazon Redshift
-- Cloudwatch
 - Fargate
 - App Mesh : https://aws.amazon.com/about-aws/whats-new/2018/11/introducing-aws-app-mesh---service-mesh-for-microservices-on-aws/
 

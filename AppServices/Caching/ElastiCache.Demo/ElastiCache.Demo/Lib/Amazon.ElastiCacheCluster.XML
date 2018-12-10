@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Amazon.ElastiCacheCluster</name>
+    </assembly>
+    <members>
+        <member name="T:Amazon.ElastiCacheCluster.ClusterConfigSettings">
+            <summary>
+            A config settings object used to configure the client config
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ClusterConfigSettings.#ctor">
+            <summary>
+            For config manager
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ClusterConfigSettings.#ctor(System.String,System.Int32)">
+            <summary>
+            Used to initialize a setup with a host and port
+            </summary>
+            <param name="hostname">Cluster hostname</param>
+            <param name="port">Cluster port</param>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.NodeFactory">
+            <summary>
+            An object that produces nodes for the Discovery Node, mainly used for testing
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.ClusterEndPoint">
+            <summary>
+            Class containing information about the cluster host and port
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.ClusterNode">
+            <summary>
+            Class containing information about the node configuration
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.ClusterPoller">
+            <summary>
+            Class containing information about the poller configuration
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.SocketPool">
+            <summary>
+            Gets or sets the configuration of the socket pool.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.Authentication">
+            <summary>
+            Gets or sets the configuration of the authenticator.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.NodeLocator">
+            <summary>
+            Gets or sets the <see cref="T:Enyim.Caching.Memcached.IMemcachedNodeLocator"/> which will be used to assign items to Memcached nodes.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.KeyTransformer">
+            <summary>
+            Gets or sets the <see cref="T:Enyim.Caching.Memcached.IMemcachedKeyTransformer"/> which will be used to convert item keys for Memcached.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.Transcoder">
+            <summary>
+            Gets or sets the <see cref="T:Enyim.Caching.Memcached.ITranscoder"/> which will be used serialzie or deserialize items.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.PerformanceMonitor">
+            <summary>
+            Gets or sets the <see cref="T:Enyim.Caching.Memcached.IPerformanceMonitor"/> which will be used monitor the performance of the client.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.Protocol">
+            <summary>
+            Gets or sets the type of the communication between client and server.
+            </summary>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.ClusterConfigSettings.Endpoint">
+            <summary>
+            Endpoint that contains the hostname and port for auto discovery
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.Endpoint.HostName">
+            <summary>
+            The hostname of the cluster containing ".cfg."
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.Endpoint.Port">
+            <summary>
+            The port of the endpoint
+            </summary>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.ClusterConfigSettings.NodeSettings">
+            <summary>
+            Settings used for the discovery node
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.NodeSettings.NodeTries">
+            <summary>
+            How many tries the node should use to get a config
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.NodeSettings.NodeDelay">
+            <summary>
+            The delay between tries for the config in miliseconds
+            </summary>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.ClusterConfigSettings.PollerSettings">
+            <summary>
+            Settins used for the configuration poller
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ClusterConfigSettings.PollerSettings.IntervalDelay">
+            <summary>
+            The delay between polls in miliseconds
+            </summary>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.ClusterClient">
+            <summary>
+            Used to instantiate MemcachedClients with auto discovery enabled.
+            Only use these for easy creation because the ability to get information from the config object is lost
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ClusterClient.CreateClient">
+            <summary>
+            Creates a MemcachedClient using the settings found in the app.config section "clusterclient"
+            </summary>
+            <returns>A new MemcachedClient configured for auto discovery</returns>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ClusterClient.CreateClient(System.String)">
+            <summary>
+            Creates a MemcachedClient using the settings found in the app.config section specified
+            </summary>
+            <param name="section">A section in app.config that has a endpoint field</param>
+            <returns>A new MemcachedClient configured for auto discovery</returns>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ClusterClient.CreateClient(System.String,System.Int32)">
+            <summary>
+            Creates a MemcachedClient using the default settings with the endpoint and port specified
+            </summary>
+            <param name="endpoint">The url for the cluster endpoint containing .cfg.</param>
+            <param name="port">The port to access the cluster on</param>
+            <returns>A new MemcachedClient configured for auto discovery</returns>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ClusterClient.CreateClient(Amazon.ElastiCacheCluster.ElastiCacheClusterConfig)">
+            <summary>
+            Creates a MemcachedClient using the Client config provided
+            </summary>
+            <param name="config">The config to instantiate the client with</param>
+            <returns>A new MemcachedClient configured for auto discovery</returns>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.Helpers.AddrUtil">
+            <summary>
+            A class used to parse configs of Auto Discovery
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.Helpers.AddrUtil.HashEndPointList(System.String)">
+            <summary>
+            Creates a list of endpoints from a string returned in the config request
+            </summary>
+            <param name="endpoints">Format: host1|ip1|port1 host2|ip2|port2 ...</param>
+            <returns>List of the endpoints parsed to ip:port endpoints for connections</returns>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.Pools.AutoBinaryPool">
+            <summary>
+            Server pool implementing the binary protocol.
+            </summary>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.Pools.AutoServerPool">
+            <summary>
+            A server pool just like the default that enables safely changing the servers of the locator
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.Pools.AutoServerPool.#ctor(Enyim.Caching.Configuration.IMemcachedClientConfiguration,Enyim.Caching.Memcached.IOperationFactory)">
+            <summary>
+            Creates a server pool for auto discovery
+            </summary>
+            <param name="configuration">The client configuration using the pool</param>
+            <param name="opFactory">The factory used to create operations on demand</param>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.Pools.AutoServerPool.UpdateLocator(System.Collections.Generic.List{System.Net.IPEndPoint})">
+            <summary>
+            Used to update the servers for Auto discovery
+            </summary>
+            <param name="endPoints">The connections to all the cluster nodes</param>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig">
+            <summary>
+            Configuration class for auto discovery
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.#ctor">
+            <summary>
+            Initializes a MemcahcedClient config with auto discovery enabled from the app.config clusterclient section
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.#ctor(System.String)">
+            <summary>
+            Initializes a MemcahcedClient config with auto discovery enabled from the app.config with the specified section
+            </summary>
+            <param name="section">The section to get config settings from</param>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a MemcahcedClient config with auto discovery enabled
+            </summary>
+            <param name="hostname">The hostname of the cluster containing ".cfg."</param>
+            <param name="port">The port to connect to for communication</param>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.#ctor(Amazon.ElastiCacheCluster.ClusterConfigSettings)">
+            <summary>
+            Initializes a MemcahcedClient config with auto discovery enabled using the setup provided
+            </summary>
+            <param name="setup">The setup to get conifg settings from</param>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.DiscoveryNode">
+            <summary>
+            The node used to check the cluster's configuration
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.Servers">
+            <summary>
+            Gets a list of <see cref="T:IPEndPoint"/> each representing a Memcached server in the pool.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.SocketPool">
+            <summary>
+            Gets the configuration of the socket pool.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.Authentication">
+            <summary>
+            Gets the authentication settings.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.KeyTransformer">
+            <summary>
+            Gets or sets the <see cref="T:Enyim.Caching.Memcached.IMemcachedKeyTransformer"/> which will be used to convert item keys for Memcached.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.NodeLocator">
+            <summary>
+            Gets or sets the Type of the <see cref="T:Enyim.Caching.Memcached.IMemcachedNodeLocator"/> which will be used to assign items to Memcached nodes.
+            </summary>
+            <remarks>If both <see cref="M:NodeLocator"/> and  <see cref="M:NodeLocatorFactory"/> are assigned then the latter takes precedence.</remarks>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.NodeLocatorFactory">
+            <summary>
+            Gets or sets the NodeLocatorFactory instance which will be used to create a new IMemcachedNodeLocator instances.
+            </summary>
+            <remarks>If both <see cref="M:NodeLocator"/> and  <see cref="M:NodeLocatorFactory"/> are assigned then the latter takes precedence.</remarks>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.Transcoder">
+            <summary>
+            Gets or sets the <see cref="T:Enyim.Caching.Memcached.ITranscoder"/> which will be used serialize or deserialize items.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.PerformanceMonitor">
+            <summary>
+            Gets or sets the <see cref="T:Enyim.Caching.Memcached.IPerformanceMonitor"/> instance which will be used monitor the performance of the client.
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.ElastiCacheClusterConfig.Protocol">
+            <summary>
+            Gets or sets the type of the communication between client and server.
+            </summary>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.Operations.ConfigGetOperation">
+            <summary>
+            Used to get auto discovery information from ElastiCache endpoints version 1.4.14 or higher
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.Operations.ConfigGetOperation.#ctor(System.String)">
+            <summary>
+            Creates a config get for ElastiCache
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.Operations.ConfigGetOperation.Result">
+            <summary>
+            The CacheItem result of a "config get *key*" request
+            </summary>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.ConfigurationPoller">
+            <summary>
+            A poller used to reconfigure the client servers when updates occur to the cluster configuration
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ConfigurationPoller.#ctor(Amazon.ElastiCacheCluster.ElastiCacheClusterConfig)">
+            <summary>
+            Creates a poller for Auto Discovery with the default intervals
+            </summary>
+            <param name="client">The memcached client to update servers for</param>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ConfigurationPoller.#ctor(Amazon.ElastiCacheCluster.ElastiCacheClusterConfig,System.Int32)">
+            <summary>
+            Creates a poller for Auto Discovery with the defined itnerval, delay, tries, and try delay for polling
+            </summary>
+            <param name="client">The memcached client to update servers for</param>
+            <param name="intervalDelay">The amount of time between polling operations in miliseconds</param>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ConfigurationPoller.pollOnTimedEvent(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Used by the poller's timer to update the cluster configuration if a new version is available
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.ConfigurationPoller.StopPolling">
+            <summary>
+            Disposes the background thread that is used for polling the configs
+            </summary>
+        </member>
+        <member name="T:Amazon.ElastiCacheCluster.DiscoveryNode">
+            <summary>
+            A class that manages the discovery of endpoints inside of an ElastiCache cluster
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.#ctor(Amazon.ElastiCacheCluster.ElastiCacheClusterConfig,System.String,System.Int32)">
+            <summary>
+            The node used to discover endpoints in an ElastiCache cluster
+            </summary>
+            <param name="config">The config of the client to access the SocketPool</param>
+            <param name="hostname">The host name of the cluster with .cfg. in name</param>
+            <param name="port">The port of the cluster</param>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.#ctor(Amazon.ElastiCacheCluster.ElastiCacheClusterConfig,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            The node used to discover endpoints in an ElastiCache cluster
+            </summary>
+            <param name="config">The config of the client to access the SocketPool</param>
+            <param name="hostname">The host name of the cluster with .cfg. in name</param>
+            <param name="port">The port of the cluster</param>
+            <param name="tries">The number of tries for requesting config info</param>
+            <param name="delay">The time, in miliseconds, to wait between tries</param>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.StartPoller">
+            <summary>
+            Used to start a poller that checks for changes in the cluster client configuration
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.StartPoller(System.Int32)">
+            <summary>
+            Used to start a poller that checks for changes in the cluster client configuration
+            </summary>
+            <param name="intervalDelay">Time between pollings, in miliseconds</param>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.GetEndPointList">
+            <summary>
+            Parses the string NodeConfig into a list of IPEndPoints for configuration
+            </summary>
+            <returns>A list of IPEndPoints for config to use</returns>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.GetNodeConfig">
+            <summary>
+            Gets the Node configuration from "config get cluster" if it's new or "get AmazonElastiCache:cluster" if it's older than
+            1.4.14
+            </summary>
+            <returns>A string in the format "hostname1|ip1|port1 hostname2|ip2|port2 ..."</returns>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.GetNodeVersion">
+            <summary>
+            Finds the version of Memcached the Elasticache setup is running on
+            </summary>
+            <returns>Version of memcahced running on nodes</returns>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.ResolveEndPoint">
+            <summary>
+            Tries to resolve the endpoint ip, used if the connection fails
+            </summary>
+            <returns>The resolved endpoint as an ip and port</returns>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.DiscoveryNode.Dispose">
+            <summary>
+            Stops the current poller
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.DiscoveryNode.NodeVersion">
+            <summary>
+            The version of memcached running on the Nodes
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.DiscoveryNode.ClusterVersion">
+            <summary>
+            The version of the cluster configuration
+            </summary>
+        </member>
+        <member name="P:Amazon.ElastiCacheCluster.DiscoveryNode.NodesInCluster">
+            <summary>
+            The number of nodes running inside of the cluster
+            </summary>
+        </member>
+        <member name="F:Amazon.ElastiCacheCluster.Helpers.TextSocketHelper.CommandTerminator">
+            <summary>
+            Signifies the string that is used to end a command
+            </summary>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.Helpers.TextSocketHelper.ReadResponse(Enyim.Caching.Memcached.PooledSocket)">
+            <summary>
+            Reads the response of the server.
+            </summary>
+            <returns>The data sent by the memcached server.</returns>
+            <exception cref="T:System.InvalidOperationException">The server did not sent a response or an empty line was returned.</exception>
+            <exception cref="T:Enyim.Caching.Memcached.MemcachedException">The server did not specified any reason just returned the string ERROR. - or - The server returned a SERVER_ERROR, in this case the Message of the exception is the message returned by the server.</exception>
+            <exception cref="T:Enyim.Caching.Memcached.MemcachedClientException">The server did not recognize the request sent by the client. The Message of the exception is the message returned by the server.</exception>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.Helpers.TextSocketHelper.ReadLine(Enyim.Caching.Memcached.PooledSocket)">
+            <summary>
+            Reads a line from the socket. A line is terninated by \r\n.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.Helpers.TextSocketHelper.GetCommandBuffer(System.String)">
+            <summary>
+            Gets the bytes representing the specified command. returned buffer can be used to streamline multiple writes into one Write on the Socket
+            using the <see cref="M:Enyim.Caching.Memcached.PooledSocket.Write(IList&lt;ArraySegment&lt;byte&gt;&gt;)"/>
+            </summary>
+            <param name="value">The command to be converted.</param>
+            <returns>The buffer containing the bytes representing the command. The command must be terminated by \r\n.</returns>
+            <remarks>The Nagle algorithm is disabled on the socket to speed things up, so it's recommended to convert a command into a buffer
+            and use the <see cref="M:Enyim.Caching.Memcached.PooledSocket.Write(IList&lt;ArraySegment&lt;byte&gt;&gt;)"/> to send the command and the additional buffers in one transaction.</remarks>
+        </member>
+        <member name="M:Amazon.ElastiCacheCluster.Helpers.TextSocketHelper.GetCommandBuffer(System.String,System.Collections.Generic.IList{System.ArraySegment{System.Byte}})">
+            <summary>
+            Gets the bytes representing the specified command. Returns buffer in the provided list.
+            </summary>
+            <param name="value">The command to be converted.</param>
+            <param name="list">The list to store the buffer in.</param>
+            <returns>The buffer containing the bytes representing the command. The command must be terminated by \r\n.</returns>
+        </member>
+    </members>
+</doc>
